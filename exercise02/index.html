@@ -18,8 +18,7 @@
 </head>
 
 <body>
-	<div class="demo">
-		<div id="end" style="display: none;">結束啦啦啦啦啦</div>
+	<div class="demo">	
 		<div class="user-container">
 			<div class="title">請輸入要倒數的時間：</div>
 			<div class="user-select">
@@ -39,6 +38,7 @@
 				<button type="button" class="item__stop" onclick="stop()">斷開鎖鏈</button>
 			</div>
 		</div>
+		<div id="end" style="display: none;">結束啦啦啦啦啦</div>
 		<div class="clock simple">
 			<div id="hours-layout"></div>
 			<div class="hours-container">
@@ -64,11 +64,14 @@
 
 		function reset(){
 			var containers = document.querySelectorAll('.seconds-container'); // 取得秒針的container
-			var mmm = document.querySelectorAll('.minutes-container'); // 取得秒針的container
+			var mmm = document.querySelectorAll('.minutes-container'); // 取得分針的container
+			var hhh = document.querySelectorAll('.hours-container'); // 取得時針的container
 			containers[0].angle = 0;
 			containers[0].removeAttribute('style');
 			mmm[0].angle = 0;
 			mmm[0].removeAttribute('style');
+			hhh[0].angle = 0;
+			hhh[0].removeAttribute('style');
 			objStyle(endcut,"none");
 
 			var highestTimeoutId = setTimeout(";");
@@ -95,13 +98,50 @@
 				total = parseInt(s) + parseInt(m * 60) + parseInt(h * 60 * 60) + 1;
 
 			initClocks(h,m,s);
-			showTime();
-
+			
+			if ( h == 0 && m == 0 && s == 0){
+				console.log("沒有輸入是要動什麼QAQ");
+			} else {
+				console.log("秒針開始動了喔");
+				setHourHands(h,m,s);
 				setUpMinuteHands(s,m);
 				moveSecondHands();
-
-			console.log("秒針開始動了喔");
-
+				showTime();
+			}
+		}
+		function setHourHands(h,m,s) {
+			var containers = document.querySelectorAll('.hours-container'); // 取得秒針的container
+			var hh = h;
+			var mm = m;
+			var ss = s;
+			if (hh > 0) {
+				
+				var delay = ((parseInt(s) + 0.1)* 1000);
+				setTimeout(function () {
+					moveHourHands(containers);
+				}, delay);
+			}
+		}
+		function moveHourHands(containers) {
+			console.log("時針是跟著一起動吧");
+			// var abc = document.querySelectorAll('.minutes-container');
+			containers[0].angle += 0.5;
+			for (var i = 0; i < containers.length; i++) {
+				containers[i].style.webkitTransform = 'rotateZ(-0.5deg)'; // for Safari
+				containers[i].style.transform = 'rotateZ(-0.5deg)';
+			}
+			// 每間隔60秒執行一次
+			setInterval(function () {
+					
+					if (containers[0].angle === undefined) {
+						containers[0].angle = 1; 
+					} else {
+						containers[0].angle += 0.5; 
+					}
+					containers[0].style.webkitTransform = 'rotateZ(' + '-' + containers[0].angle + 'deg)';
+					containers[0].style.transform = 'rotateZ(' + '-' + containers[0].angle + 'deg)';
+				
+			}, 60000); // 60000毫秒=60秒
 		}
 		function moveSecondHands() {
 			var containers = document.querySelectorAll('.seconds-container'); // 取得秒針的container

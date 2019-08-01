@@ -46,6 +46,11 @@
       margin: 1rem;
       padding: 0.4rem 0;
     }
+    &__stop {
+      flex: 1;
+      margin: 1rem 1rem 1rem 0;
+      padding: 0.4rem 0;
+    }
   }
 }
 
@@ -136,12 +141,12 @@
   height: 65%;
   font-size: 1.8rem;
   font-weight: bold;
-  transform: translate(-50%,-50%) rotate(45deg);
+  transform: translate(-50%,-50%) rotate(47deg);
   transform-origin: center center;
   @for $i from 1 through 12 {
     $deg: 360/12;
     $angle: $deg * $i;
-    $rotate: $angle + 45;
+    $rotate: $angle + 47;
     & > div {
       &:nth-child(#{$i}) {
         @include translate-center;
@@ -159,4 +164,13 @@
       }
     }
   }
+}
+
+#end {
+  border: 3px solid red;
+  width: 70%;
+  margin: 2rem auto;
+  color: red;
+  font-size: 2rem;
+  padding: 2rem 0;
 }
