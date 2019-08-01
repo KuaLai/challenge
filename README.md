@@ -2,11 +2,17 @@
 
 
 本身其實就是網頁設計師，對於寫程式有著小小的興趣...
-<br>
-不是一時興起也不是想要一躍而成為工程師，我有自己的長項與專長(ex.切版邏輯 & design sense & UI/UX design experience 6years+)
+
+- 個人人格特質與專長：
+    - 想要成為有趣的人
+    - 豐富的切版經驗與邏輯變通能力
+    - design sense 
+    - UI/UX design experience 6years+)
 
 <br>
 
 ## 題目一 - 圓形時鐘倒數計時
 
 (感謝小ya大大出題目)
+數字+圓面時鐘倒數<br>
+User可自訂要倒數的時間, 開始後時鐘就一直倒數到時間結束, 提醒user
