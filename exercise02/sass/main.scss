@@ -1,0 +1,162 @@
+@charset "UTF-8";
+@import "extend";
+@import "mixins";
+
+// 選項樣式
+.demo {
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto;
+  text-align: center;
+  .user-container {
+    width: 70%;
+    margin: 2rem auto;
+    border: 1px solid #000;
+  }
+  .title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    border-bottom: 1px solid #000; 
+    padding: 2rem 0 1rem;
+    background: #fefefe;
+  }
+}
+
+.user-select {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 1rem;
+  width: 80%;
+  max-width: 500px;
+  margin: 1rem auto;
+  .item {
+    flex: 1;
+    min-width: 33%;
+
+    select {
+      border: none;
+      background: none;
+      font-size: 1.8rem;
+    }
+
+    &__button {
+      flex: 3;
+      min-width: 100%;
+      margin: 1rem;
+      padding: 0.4rem 0;
+    }
+  }
+}
+
+// 圓形時鐘樣式
+.clock {
+  border-radius: 50%;
+  border: 2vmin solid #000;
+  background: #fff;
+  background-size: 88%;
+  height: 70vmin;
+  width: 70vmin;
+  position: relative;
+  margin: 0 auto;
+  max-width: 300px;
+  max-height: 300px;
+
+}
+
+.clock.simple:after {
+  background: #000;
+  border-radius: 50%;
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 5%;
+  height: 5%;
+  z-index: 10;
+}
+
+.minutes-container, .hours-container, .seconds-container {
+  position: absolute;
+  width:100%;
+  height:100%;
+}
+.hours {
+  background: #000;
+  width: 2.5%;
+  height: 30%;
+  position: absolute;
+  top: 20%;
+  left: 48.75%;
+  transform-origin: 50% 100%;
+}
+
+.minutes {
+  background: #000;
+  width: 2%;
+  height: 40%;
+  left: 49%;
+  position: absolute;
+  top: 10%;
+  transform-origin: 50% 100%;
+}
+
+.seconds {
+  background: red;
+  width: 1%;
+  height: 60%;
+  left: 49.5%;
+  position: absolute;
+  top: 2%;
+  transform-origin: 50% 80%;
+  z-index: 8;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.hours-container {
+  animation: rotate 43200s infinite linear;
+}
+.minutes-container {
+  transition: transform 0.3s cubic-bezier(.4,2.08,.55,.44);
+}
+.seconds-container {
+  transition: transform 0.2s cubic-bezier(.4,2.08,.55,.44);
+}
+
+#hours-layout {
+  $deg: 360/12;
+  @include translate-center;
+  width: 65%;
+  height: 65%;
+  font-size: 1.8rem;
+  font-weight: bold;
+  transform: translate(-50%,-50%) rotate(45deg);
+  transform-origin: center center;
+  @for $i from 1 through 12 {
+    $deg: 360/12;
+    $angle: $deg * $i;
+    $rotate: $angle + 45;
+    & > div {
+      &:nth-child(#{$i}) {
+        @include translate-center;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        transform: rotate(#{$angle}deg);
+        transform-origin: center center;
+        span {
+          position: absolute;
+          display: block;
+          transform: rotate(-#{$rotate}deg);
+        }
+      }
+    }
+  }
+}

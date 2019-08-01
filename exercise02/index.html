@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<title>Vpon</title>
+	<style type="text/css">
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: Arial, SimHei;
+			font-size: 63%;
+		}
+		
+	</style>
+	<link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+	<div class="demo">
+		<div id="end" style="display: none;">結束啦啦啦啦啦</div>
+		<div class="user-container">
+			<div class="title">請輸入要倒數的時間：</div>
+			<div class="user-select">
+				<div class="user-hour item">
+					<select name="h" id="select-hour"></select>
+					<span>時</span>
+				</div>
+				<div class="user-minute item">
+					<select name="m" id="select-minute"></select>
+					<span>分</span>
+				</div>
+				<div class="user-second item">
+					<select name="s" id="select-second"></select>
+					<span>秒</span>
+				</div>
+				<button type="button" class="item__button" onclick="go()">開始倒數</button>
+				<button type="button" class="item__stop" onclick="stop()">斷開鎖鏈</button>
+			</div>
+		</div>
+		<div class="clock simple">
+			<div id="hours-layout"></div>
+			<div class="hours-container">
+				<div class="hours"></div>
+			</div>
+			<div class="minutes-container">
+				<div class="minutes"></div>
+			</div>
+			<div class="seconds-container">
+				<div class="seconds"></div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="js/min/jquery-1.11.2.min.js"></script>
+	<script src="js/min/democlock.min.js"></script>
+	<script src="js/min/test.min.js"></script>
+	<script>
+		var obj;
+		var value;
+		var endcut = document.getElementById("end");
+		function objStyle(obj,value){ obj.style.display = value;};
+
+		function reset(){
+			var containers = document.querySelectorAll('.seconds-container'); // 取得秒針的container
+			var mmm = document.querySelectorAll('.minutes-container'); // 取得秒針的container
+			containers[0].angle = 0;
+			containers[0].removeAttribute('style');
+			mmm[0].angle = 0;
+			mmm[0].removeAttribute('style');
+			objStyle(endcut,"none");
+
+			var highestTimeoutId = setTimeout(";");
+			for (var i = 0 ; i < highestTimeoutId ; i++) {
+				clearTimeout(i); 
+			};
+
+			var highestIntervalId = setInterval(";");
+			for (var i = 0 ; i < highestIntervalId ; i++) {
+				clearInterval(i); 
+			};
+			initClocks(0,0,0);
+			
+		};
+		function stop(){
+			reset();
+			console.log("斷開鎖鏈!!!");
+		};
+		function go() {
+			reset();
+			var h = document.getElementById("select-hour").value,
+				m = document.getElementById("select-minute").value,
+				s = document.getElementById("select-second").value;
+				total = parseInt(s) + parseInt(m * 60) + parseInt(h * 60 * 60) + 1;
+			var a = parseInt(s);
+			var b = parseInt(m * 60);
+    		var c = parseInt(h * 60 * 60);
+			initClocks(h,m,s);
+			showTime();
+			setUpMinuteHands(s,m);
+			moveSecondHands();
+			console.log("秒針開始動了喔");
+
+		}
+		function moveSecondHands() {
+			var containers = document.querySelectorAll('.seconds-container'); // 取得秒針的container
+
+			// 每間隔1秒執行一次
+			setInterval(function() {
+
+				if (containers[0].angle === undefined) {
+					containers[0].angle = 6;
+				} else {
+					containers[0].angle += 6;
+				}
+				containers[0].style.webkitTransform = 'rotateZ(' + containers[0].angle + 'deg)';
+				containers[0].style.transform = 'rotateZ(' + containers[0].angle + 'deg)';
+
+			}, 1000); // 1000毫秒=1秒
+		}
+		function setUpMinuteHands(s,m) {
+			var containers = document.querySelectorAll('.minutes-container');
+			var test = s;
+			var tt = m;
+			var secondAngle = containers[0].getAttribute("data-second-angle"); // 取得剛註記的秒針角度
+			// 計算目前分針還剩多少時間走完目前的分鐘
+			if (tt > 0) {
+				
+				// 設定在目前的分鐘結束時，會觸發推動分針的延遲時間
+				var delay = ((parseInt(test) + 0.1)* 1000);
+				// 360度減秒針的角度即為目前分鐘剩下可跑的角度，在除以每秒6度，得到目前分鐘剩下可跑的時間
+				// 例如秒針跑了30秒，則secondAngle為30秒*6度=180度，又(360度-180度)/6(度/秒)=30秒，代表目前分鐘還有30秒可以跑完。
+				// 因為setTimeout的delay單位是以毫秒(千分之一秒)，所以要乘1000，也就是(30+0.1)*1000=30100毫秒=30.1秒(多的0.1秒是讓分針的移動比秒針慢一點，效果更擬真)
+				// 也就是在30.1秒後觸發推動分針的方法moveMinuteHands()
+				setTimeout(function () {
+					moveMinuteHands(containers);
+				}, delay);
+			}
+		}
+		function moveMinuteHands(containers) {
+			// var abc = document.querySelectorAll('.minutes-container');
+			containers[0].angle += 6;
+			console.log("分針等等就要開始動了喔");
+			for (var i = 0; i < containers.length; i++) {
+				containers[i].style.webkitTransform = 'rotateZ(-6deg)'; // for Safari
+				containers[i].style.transform = 'rotateZ(-6deg)'; // 在30.1秒後讓分針轉到6度的位置
+			}
+			// 每間隔60秒執行一次
+			setInterval(function () {
+					
+					if (containers[0].angle === undefined) {
+						containers[0].angle = 12; // 因為第一次已先移動了6度，所以下一次要多6度，所以是12度
+					} else {
+						containers[0].angle += 6; // 之後每一次的位置都是前一次的度數都多加6度
+					}
+					containers[0].style.webkitTransform = 'rotateZ(' + '-' + containers[0].angle + 'deg)';
+					containers[0].style.transform = 'rotateZ(' + '-' + containers[0].angle + 'deg)';
+				
+			}, 60000); // 60000毫秒=60秒
+		}
+		
+	
+		function showTime() {
+			total -= 1;
+			console.log(total);
+			if (total == 0) {
+				// alert("結束啦！！");
+				reset();
+				objStyle(endcut,"block");
+				return(200);
+			}
+			setTimeout("showTime()", 1000);
+
+		}
+	</script>
+</body>
+
+</html>

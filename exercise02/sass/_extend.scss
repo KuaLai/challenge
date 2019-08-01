@@ -1,0 +1,70 @@
+@import "mixins";
+/*字型*/
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+$fontxm: arial,PMingLiU,'\65B0\7D30\660E\9AD4';
+$fontjh: arial,'Microsoft JhengHei','\5FAE\8EDF\6B63\9ED1\9AD4',PMingLiU,'\65B0\7D30\660E\9AD4';
+$fontyh: arial,'Microsoft YaHei','\5FAE\8F6F\96C5\9ED1',PMingLiU,'\65B0\7D30\660E\9AD4';
+$fontUti: 'Noto Sans TC','LiHei Pro',微軟正黑體,新細明體,sans-serif;
+
+/******************************************/
+
+$hd-height: 80px;
+$bg: "../images/";
+// $bg: "~@/assets/images/";
+$width: 1000px;
+$bg-color: #EFEFEF;
+$body-color: #fff;
+$link-color: #4a4a4a;
+$link-active: #cc2f2d;
+$link-color-hover: #cc2f2d;
+$main-color: #4a4a4a;
+$font-size: 13px;
+$fontStyle: $fontUti;
+$footer-bg: #4a4a4a;
+
+/******************************************/
+
+$red: #e70400;
+$green: #7ed321;
+$yellow: #f6a623;
+$gray: #979797;
+
+/******************************************/
+
+$nav-style-light: #fff;
+$nav-style-dark: #222;
+$item-bg : rgba(122, 122, 122, 0.6),
+rgba(255, 0, 0, 0.6),
+rgba(0, 99, 248, 0.6),
+rgba(255, 166, 0, 0.6),
+rgba(134, 163, 1, 0.6),
+rgba(0, 167, 167, 0.6),
+rgba(100, 67, 138, 0.6);
+
+ul,li,p,ol,figure {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.font {
+    &--b {
+        color: #000;
+        font-weight: bold;
+    }
+    &--br {
+        color: #be9400;
+    }
+    &--g {
+        color: #555555;
+    }
+}
+
+.icon {
+    &-arrow {
+        &--top {
+            @include triangle(12px,#000,top);
+        }
+    }
+}
