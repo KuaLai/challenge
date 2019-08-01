@@ -93,13 +93,13 @@
 				m = document.getElementById("select-minute").value,
 				s = document.getElementById("select-second").value;
 				total = parseInt(s) + parseInt(m * 60) + parseInt(h * 60 * 60) + 1;
-			var a = parseInt(s);
-			var b = parseInt(m * 60);
-    		var c = parseInt(h * 60 * 60);
+
 			initClocks(h,m,s);
 			showTime();
-			setUpMinuteHands(s,m);
-			moveSecondHands();
+
+				setUpMinuteHands(s,m);
+				moveSecondHands();
+
 			console.log("秒針開始動了喔");
 
 		}
@@ -114,8 +114,8 @@
 				} else {
 					containers[0].angle += 6;
 				}
-				containers[0].style.webkitTransform = 'rotateZ(' + containers[0].angle + 'deg)';
-				containers[0].style.transform = 'rotateZ(' + containers[0].angle + 'deg)';
+				containers[0].style.webkitTransform = 'rotateZ(' + '-' + containers[0].angle + 'deg)';
+				containers[0].style.transform = 'rotateZ(' + '-' + containers[0].angle + 'deg)';
 
 			}, 1000); // 1000毫秒=1秒
 		}

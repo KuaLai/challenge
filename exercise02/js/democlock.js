@@ -17,7 +17,7 @@ function initClocks(h,m,s) {
         },
         {
             hand: 'seconds',
-            angle: ('-' + seconds * (360 / 60)) // 目前時間的秒針角度
+            angle: (seconds * (360 / 60)) // 目前時間的秒針角度
             // 秒針一圈60秒，一圈360度，所以360度/60秒=6度/秒
         }
     ];
