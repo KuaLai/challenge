@@ -15,11 +15,11 @@
             <canvas id="canvas"></canvas>
             <div class="arrow"><img src="images/arrow.svg" alt=""></div>
             <div class="star__item">
-                <div id="s01" class="item"></div>
-                <div id="s02" class="item"></div>
-                <div id="s03" class="item"></div>
-                <div id="s04" class="item"></div>
-                <div id="s05" class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
             </div>
             <div class="star__bg">
                 <div class="item"><img src="images/img-star.jpg" alt=""></div>
@@ -44,11 +44,7 @@
             endcut = document.querySelector(".endCut"),
             arrow = document.querySelector(".arrow"),
             bg = document.querySelectorAll(".star__bg .item");
-        let t01 = document.getElementById("s01");
-        let t02 = document.getElementById("s05");
-        let t03 = document.getElementById("s02");
-        let t04 = document.getElementById("s04");
-        let t05 = document.getElementById("s03");
+        let point = document.querySelectorAll(".star__item .item");
             // touch start listener
         let a,b,c,d,e;
         function objStyle(obj,value){ obj.style.display = value;};
@@ -59,37 +55,32 @@
                 startX = touch.pageX;
                 startY = touch.pageY;
                 if (startX > 160 && startX < 240 && startY < 40 && startY > 0) { 
-                    console.log("這個是上面的那個點點~");                  
-                    
-                    t01.classList.add("touch");             
+                    // console.log("這個是上面的那個點點~");                  
+                    point[0].classList.add("touch");             
                     a = true;
                     magic(a,b,c,d,e);
                 }
-                if (startX > 60 && startX < 100 && startY < 340 && startY > 315) {
-                    console.log("這個是下面左邊的那個點點~");
-                    
-                    t02.classList.add("touch");
+                if (startX > 325 && startX < 350 && startY < 172 && startY > 150){
+                    // console.log("這個是下面左邊的那個點點~");             
+                    point[1].classList.add("touch");
                     b = true;
                     magic(a,b,c,d,e);
                 }
-                if (startX > 325 && startX < 350 && startY < 172 && startY > 150) {
-                    console.log("這個是右邊的那個點點~");
-                    
-                    t03.classList.add("touch");
+                if (startX > 260 && startX < 290 && startY < 340 && startY > 300) {
+                    // console.log("這個是右邊的那個點點~");                 
+                    point[2].classList.add("touch");
                     c = true;
                     magic(a,b,c,d,e);
                 }
-                if (startX > 25 && startX < 40 && startY < 160 && startY > 140) {
-                    console.log("這個是左邊的那個點點~");
-                    
-                    t04.classList.add("touch");
+                if (startX > 20 && startX < 50 && startY < 170 && startY > 130) {
+                    // console.log("這個是左邊的那個點點~");               
+                    point[3].classList.add("touch");
                     d = true;
                     magic(a,b,c,d,e);
                 }
-                if (startX > 260 && startX < 290 && startY < 340 && startY > 300) {
-                    console.log("這個是下面右邊的那個點點~");
-                    
-                    t05.classList.add("touch");
+                if (startX > 60 && startX < 100 && startY < 340 && startY > 315) {
+                    // console.log("這個是下面右邊的那個點點~");                 
+                    point[4].classList.add("touch");
                     e = true;
                     magic(a,b,c,d,e);
                 }
@@ -97,19 +88,19 @@
             }
             function magic(a,b,c,d,e) {
                 if (a == true){
-                    console.log("第一個點通過囉");
+                    // console.log("第一個點通過囉");
                 }
                 if (b == true){
-                    console.log("第二個點通過囉");
+                    // console.log("第二個點通過囉");
                 }
                 if (c == true){
-                    console.log("第三個點通過囉");
+                    // console.log("第三個點通過囉");
                 }
                 if (d == true){
-                    console.log("第四個點通過囉");
+                    // console.log("第四個點通過囉");
                 }
                 if (e == true){
-                    console.log("第五個點通過囉");
+                    // console.log("第五個點通過囉");
                 }
                 if (a == true && b == true && c == true && d == true && e == true){
                     console.log("畫完魔法陣囉...我要接著跳轉囉！！")
@@ -141,13 +132,13 @@
             objStyle(bg[0],"block");
             objStyle(demo,"block");
             objStyle(endcut,"none");
-            t01.classList.remove("touch");
-            t02.classList.remove("touch");
-            t03.classList.remove("touch");
-            t04.classList.remove("touch");
-            t05.classList.remove("touch");
+            
             a = b = c = d = e = false;
             objStyle(arrow,"block");
+            var i;
+            for (i = 0; i < point.length; i++) {
+                point[i].classList.remove("touch");
+            }
         };
 
     </script>
