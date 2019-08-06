@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<title>exercise01</title>
+	<link rel="stylesheet" href="css/exercise.css">
+</head>
+
+<body>
+    <div class="mobile__mask"><div>本練習只提供手機模式測驗</div></div>
+	<div class="demo">
+        <div class="star" >
+            <canvas id="canvas"></canvas>
+            <div class="arrow"><img src="images/arrow.svg" alt=""></div>
+            <div class="star__item">
+                <div id="s01" class="item"></div>
+                <div id="s02" class="item"></div>
+                <div id="s03" class="item"></div>
+                <div id="s04" class="item"></div>
+                <div id="s05" class="item"></div>
+            </div>
+            <div class="star__bg">
+                <div class="item"><img src="images/img-star.jpg" alt=""></div>
+                <div class="item" style="display: none;"><img src="images/img-star-p.jpg" alt=""></div>
+            </div>
+        </div>
+        <div class="tips">請跟著指示畫出五芒星解鎖</div>
+	</div>
+	<div class="endCut" style="display: none;">
+        <div>
+            <span>覆蓋這張卡片，結束這回合!!</span>
+            <button type="button" class="endCut__button" onclick="replay()">開玩一次</button>
+        </div>
+    </div>
+	<script src="js/min/jquery-1.11.2.min.js"></script>
+    <script>
+        // define global variable
+        let obj,value;
+        let canvas = document.getElementById("canvas"),
+            spirit, startX, startY;
+        let demo = document.querySelector(".demo"),
+            endcut = document.querySelector(".endCut"),
+            arrow = document.querySelector(".arrow"),
+            bg = document.querySelectorAll(".star__bg .item");
+        let t01 = document.getElementById("s01");
+        let t02 = document.getElementById("s05");
+        let t03 = document.getElementById("s02");
+        let t04 = document.getElementById("s04");
+        let t05 = document.getElementById("s03");
+            // touch start listener
+        let a,b,c,d,e;
+        function objStyle(obj,value){ obj.style.display = value;};
+        function touchmove(event) {
+                event.preventDefault();
+                if (spirit || !event.touches.length) return;
+                let touch = event.touches[0];
+                startX = touch.pageX;
+                startY = touch.pageY;
+                if (startX > 160 && startX < 240 && startY < 40 && startY > 0) { 
+                    console.log("這個是上面的那個點點~");                  
+                    
+                    t01.classList.add("touch");             
+                    a = true;
+                    magic(a,b,c,d,e);
+                }
+                if (startX > 60 && startX < 100 && startY < 340 && startY > 315) {
+                    console.log("這個是下面左邊的那個點點~");
+                    
+                    t02.classList.add("touch");
+                    b = true;
+                    magic(a,b,c,d,e);
+                }
+                if (startX > 325 && startX < 350 && startY < 172 && startY > 150) {
+                    console.log("這個是右邊的那個點點~");
+                    
+                    t03.classList.add("touch");
+                    c = true;
+                    magic(a,b,c,d,e);
+                }
+                if (startX > 25 && startX < 40 && startY < 160 && startY > 140) {
+                    console.log("這個是左邊的那個點點~");
+                    
+                    t04.classList.add("touch");
+                    d = true;
+                    magic(a,b,c,d,e);
+                }
+                if (startX > 260 && startX < 290 && startY < 340 && startY > 300) {
+                    console.log("這個是下面右邊的那個點點~");
+                    
+                    t05.classList.add("touch");
+                    e = true;
+                    magic(a,b,c,d,e);
+                }
+                // console.log(startX,startY);
+            }
+            function magic(a,b,c,d,e) {
+                if (a == true){
+                    console.log("第一個點通過囉");
+                }
+                if (b == true){
+                    console.log("第二個點通過囉");
+                }
+                if (c == true){
+                    console.log("第三個點通過囉");
+                }
+                if (d == true){
+                    console.log("第四個點通過囉");
+                }
+                if (e == true){
+                    console.log("第五個點通過囉");
+                }
+                if (a == true && b == true && c == true && d == true && e == true){
+                    console.log("畫完魔法陣囉...我要接著跳轉囉！！")
+                    
+                    setTimeout(function(){
+                        objStyle(bg[0],"none");
+                        objStyle(bg[1],"block");
+                    },1000);
+                    setTimeout(function(){
+                        objStyle(demo,"none");
+                        objStyle(endcut,"block");
+                    },3000)
+                }
+            };
+            function touchstart(event) {
+                event.preventDefault();
+                if (spirit || !event.touches.length) return;
+                let touch = event.touches[0];
+                startX = touch.pageX;
+                startY = touch.pageY;
+                objStyle(arrow,"none");
+            }
+        // add touch start listener
+        canvas.addEventListener("touchmove", touchmove, false);
+        canvas.addEventListener("touchstart", touchstart, false);
+        
+        function replay(){
+            objStyle(bg[1],"none");
+            objStyle(bg[0],"block");
+            objStyle(demo,"block");
+            objStyle(endcut,"none");
+            t01.classList.remove("touch");
+            t02.classList.remove("touch");
+            t03.classList.remove("touch");
+            t04.classList.remove("touch");
+            t05.classList.remove("touch");
+            a = b = c = d = e = false;
+            objStyle(arrow,"block");
+        };
+
+    </script>
+</body>
+
+</html>
