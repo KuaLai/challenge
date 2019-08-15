@@ -45,49 +45,42 @@
             arrow = document.querySelector(".arrow"),
             bg = document.querySelectorAll(".star__bg .item");
         let point = document.querySelectorAll(".star__item .item");
-        let a,b,c,d,e,f;
-        let magicarr = [a,b,c,d,e,f];
+        // let a,b,c,d,e,f;
+        let magicarr = [];
 
         // touch start listener
         function objStyle(obj,value){ obj.style.display = value;};
         function touchmove(event) {
-                event.preventDefault();
+            event.preventDefault();
                 if (spirit || !event.touches.length) return;
                 let touch = event.touches[0];
                 startX = touch.pageX;
                 startY = touch.pageY;
-                if (startX > 160 && startX < 240 && startY < 40 && startY > 0) { 
-                    // console.log("這個是上面的那個點點~");                  
-                    point[0].classList.add("touch");
-                    magicarr[0] = 1;       
-                }
-                
+                // console.log(startX,startY);
                 if (startX > 60 && startX < 100 && startY < 340 && startY > 315) {
                     // console.log("這個是下面右邊的那個點點~");                 
                     point[4].classList.add("touch");
-                    magicarr[1] = 2;  
-                }
-                if (startX > 260 && startX < 290 && startY < 340 && startY > 300) {
-                    // console.log("這個是右邊的那個點點~");                 
-                    point[2].classList.add("touch");
-                    magicarr[4] = 5;  
-                }
-                if (startX > 20 && startX < 50 && startY < 170 && startY > 130) {
-                    // console.log("這個是左邊的那個點點~");               
-                    point[3].classList.add("touch");
-                    magicarr[3] = 4;  
+                    magicarr.push("2");  
                 }
                 if (startX > 325 && startX < 350 && startY < 172 && startY > 150){
                     // console.log("這個是下面左邊的那個點點~");             
                     point[1].classList.add("touch");
-                    magicarr[2] = 3;  
-                    
+                    magicarr.push("3");  
+                }
+                if (startX > 20 && startX < 50 && startY < 170 && startY > 130) {
+                    // console.log("這個是左邊的那個點點~");               
+                    point[3].classList.add("touch");
+                    magicarr.push("4"); 
+                }
+                if (startX > 260 && startX < 290 && startY < 340 && startY > 300) {
+                    // console.log("這個是右邊的那個點點~");                 
+                    point[2].classList.add("touch");
+                    magicarr.push("5");  
                 }
                 if (startX > 190 && startX < 210 && startY < 80 && startY > 50) {
                     // console.log("最後的點點");                 
-                    magicarr[5] = 0;  
+                    magicarr.push("0"); 
                 }
-                // console.log(startX,startY);
             }
             
             function touchstart(event) {
@@ -97,13 +90,23 @@
                 startX = touch.pageX;
                 startY = touch.pageY;
                 objStyle(arrow,"none");
+                
+               
+                if (startX > 160 && startX < 240 && startY < 40 && startY > 0) { 
+                    // console.log("這個是上面的那個點點~");                  
+                    point[0].classList.add("touch");
+                    magicarr.push("1");       
+                }
                 canvas.addEventListener("touchmove", touchmove, false);
+                
             };
             function touchend(event) {
                 let checkarr = [1,2,3,4,5,0];
-                
-                console.log(magicarr);
-                if ( magicarr.toString() == checkarr.toString() ) {
+                let finalarr = magicarr.filter(function(element, index, arr){
+                    return arr.indexOf(element) === index;
+                });
+                console.log(finalarr);
+                if ( finalarr.toString() === checkarr.toString() ) {
                     console.log("畫完魔法陣囉...我要接著跳轉囉！！")
                     setTimeout(function(){
                         objStyle(bg[0],"none");
