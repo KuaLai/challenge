@@ -57,7 +57,7 @@ function touchmove(event) {
             return (name = "c4", stuas = true, checkOptin(name, stuas));
         }
     }
-    if (startX > pt1.x && startX < (pt1.x + 40) && startY > (pt1.y + 10) && startY < (pt1.y + 40)) {
+    if (startX > (pt1.x + 10)  && startX < (pt1.x + 40) && startY > (pt1.y - 10) && startY < (pt1.y + 40)) {
         if (stuasList[4] != 1) {
             stuasList[4] = 1;
             return (name = "end", stuas = true, checkOptin(name, stuas));
@@ -108,6 +108,7 @@ function touchstart(event) {
 function touchend(event) {
     let checkarr = [1, 2, 3, 4, 5, 0];
     let finalarr = _.isEqual(checkarr, magicarr);
+    console.log(magicarr);
     if (finalarr === true) {
         console.log("畫完魔法陣囉...我要接著跳轉囉！！")
         objStyle(bg[0], "none");
