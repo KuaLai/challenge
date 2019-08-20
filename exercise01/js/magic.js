@@ -54,10 +54,11 @@ function touchmove(event) {
     if (startX > (pt3.x - 20) && startX < (pt3.x + 20) && startY < (pt3.y + 20) && startY > (pt3.y - 20)) {
         if (stuasList[3] != 1) {
             stuasList[3] = 1;
+            stuasList[4] = 0;
             return (name = "c4", stuas = true, checkOptin(name, stuas));
         }
     }
-    if (startX > (pt1.x + 10)  && startX < (pt1.x + 40) && startY > (pt1.y - 10) && startY < (pt1.y + 40)) {
+    if (startX > (pt1.x - 20)  && startX < (pt1.x + 20) && startY > (pt1.y - 20) && startY < (pt1.y + 20)) {
         if (stuasList[4] != 1) {
             stuasList[4] = 1;
             return (name = "end", stuas = true, checkOptin(name, stuas));
@@ -106,7 +107,7 @@ function touchstart(event) {
 };
 
 function touchend(event) {
-    let checkarr = [1, 2, 3, 4, 5, 0];
+    let checkarr = [1, 0, 2, 3, 4, 5, 0];
     let finalarr = _.isEqual(checkarr, magicarr);
     console.log(magicarr);
     if (finalarr === true) {
