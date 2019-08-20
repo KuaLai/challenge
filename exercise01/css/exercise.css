@@ -222,13 +222,13 @@ img {
 }
 
 .star__item .item:nth-child(2) {
-	left: 90%;
-	top: 40%;
+	left: 22%;
+	top: 88%;
 }
 
 .star__item .item:nth-child(3) {
-	left: 74%;
-	top: 89%;
+	left: 90%;
+	top: 40%;
 }
 
 .star__item .item:nth-child(4) {
@@ -237,8 +237,8 @@ img {
 }
 
 .star__item .item:nth-child(5) {
-	left: 22%;
-	top: 88%;
+	left: 74%;
+	top: 89%;
 }
 
 .endCut {
