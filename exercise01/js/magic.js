@@ -37,6 +37,8 @@ function setPoint(element,index){
 function callbackSwitch(elementX,elementY,startX,startY,index){
     let num = index;
     let allLength = statusList.length;
+
+    // isTouched()
     
     if (startX > (elementX - 40) && startX < (elementX + 40) && startY < (elementY + 40) && startY > (elementY - 40)) {
         if (statusList[num] != (num + 1)) {
@@ -46,6 +48,9 @@ function callbackSwitch(elementX,elementY,startX,startY,index){
             return(checkOptin(name));
         } 
         if ( statusList[num] == allLength ){
+
+
+            // setFirstPointToOriginalStatus
             statusList[0] = 0;  
             point[0].classList.remove("touch");
             statusList[num] = num + 1; 
@@ -77,15 +82,15 @@ function checkOptin(name) {
 // touch start listener
 function touchstart(event) {
     event.preventDefault();
-    if (spirit || !event.touches.length) return;
+    if (!event.touches.length) return;
     
     objStyle(arrow, "none");
-    canvas.addEventListener("touchmove", touchmove, false);
+
 };
 
 function touchmove(event) {
     event.preventDefault();
-    if (spirit || !event.touches.length) return;
+    if (!event.touches.length) return;
     let touch = event.touches[0];
     startX = touch.pageX;
     startY = touch.pageY;
@@ -100,12 +105,14 @@ function touchmove(event) {
     
 }
 function touchend() {
-    checkTouch();
+    // checkTouch();
 }
 // add touch start listener
 
 canvas.addEventListener("touchstart", touchstart, false);
 canvas.addEventListener("touchend", touchend, false);
+
+canvas.addEventListener("touchmove", touchmove,false);
 
 // replay
 function replay() {
