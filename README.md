@@ -10,14 +10,14 @@
 
 <br>
 
-## 題目一 - 隨畫面提示畫五芒星解鎖 <a target="_blank" href="https://kualai.github.io/challenge/exercise01/">demo展示連結</a>
+## 題目一 - 隨畫面提示畫五芒星解鎖 | <a target="_blank" style="font-size: 13px" href="https://kualai.github.io/challenge/exercise01/">demo展示連結</a>
 
 (感謝小ya大大出題目)
 如題, 互動解鎖跳轉下一cut
 
 <br>
 
-## 題目二 - 圓形時鐘倒數計時 <a target="_blank" href="https://kualai.github.io/challenge/exercise02/">demo展示連結</a>
+## 題目二 - 圓形時鐘倒數計時 | <a target="_blank" style="font-size: 13px" href="https://kualai.github.io/challenge/exercise02/">demo展示連結</a>
 
 (感謝小ya大大出題目)
 數字+圓面時鐘倒數<br>
